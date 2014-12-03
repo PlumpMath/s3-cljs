@@ -1,4 +1,4 @@
-(defproject viebel/s3-cljs "0.0.1"
+(defproject viebel/s3-cljs "0.0.2"
   :description "cljs wrapper to s3 sdk"
   :url "https://github.com/viebel/s3-cljs"
   :license {:name "Eclipse Public License"

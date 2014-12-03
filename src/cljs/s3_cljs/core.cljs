@@ -70,8 +70,8 @@
                                :Prefix prefix}
                               regex))]
       (case status
-        :error []
-        :ok data))))
+        :error [:error data]
+        :ok [:ok data]))))
 
 
 (defn get-several-files [get-single-file-func coll]
