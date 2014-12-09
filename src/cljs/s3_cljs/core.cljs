@@ -15,6 +15,9 @@
              (config credentials)
              (constructor.))))
 
+(defn folder [path]
+  (second (re-matches #"(.*)/.*" path)))
+
 (defn body-data-in-str [data]
   (-> (:Body data)
       str
@@ -73,6 +76,13 @@
         :error [:error data]
         :ok [:ok data]))))
 
+(defn signed-urls [bucket obj-name]
+  (let [[url-get url-head] (map
+                             #(getSignedUrl % {:Bucket bucket
+                                                  :Key obj-name
+                                                  :Expires 300})
+                             ["getObject" "headObject"])]
+    [url-get url-head (folder url-head)]))
 
 (defn get-several-files [get-single-file-func coll]
   (go-loop [res {} channels (map get-single-file-func coll)]
